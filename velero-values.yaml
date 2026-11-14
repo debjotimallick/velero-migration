@@ -1,0 +1,27 @@
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.14.4
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+configuration:
+  backupStorageLocation:
+    - name: default
+      provider: aws
+      bucket: velero-backup
+      default: true
+      accessMode: ReadWrite
+      config:
+        region: us-east-1
+        s3Url: http://192.168.0.246:4566 # LocalStack endpoint, remove if using AWS S3
+        s3ForcePathStyle: "true" # Required for LocalStack, remove if using AWS S3
+
+credentials:
+  useSecret: true
+  existingSecret: velero-aws-credentials
+
+backupsEnabled: true
+snapshotsEnabled: false
+deployNodeAgent: true
