@@ -24,6 +24,12 @@ helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
 helm install velero vmware-tanzu/velero -n velero --create-namespace -f velero-values.yaml
 ```
 
+### Install Velero on local machine
+1. On Windows, run the below command to install Velero CLI:
+```bash
+choco install velero
+```
+
 ### Deploy sample workloads on the source cluster
 1. Deploy sample workloads on the source cluster to test the migration process. You can use the following command to deploy a sample application:
 ```bash
